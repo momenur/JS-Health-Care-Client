@@ -19,4 +19,8 @@ export const navbar_options = [
     path_name: "contact",
     path: "/",
   },
+  {
+    path_name: "contact",
+    path: "/",
+  },
 ];
