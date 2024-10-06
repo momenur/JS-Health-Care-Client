@@ -1,11 +1,11 @@
-import { Button, Typography } from "@mui/material";
+import HeroSection from "@/components/ui/HomePage/HeroSection/HeroSection";
+import { Box, Button, Typography } from "@mui/material";
 
 const HomePage = () => {
   return (
-    <div>
-      <Typography>Hello Js-Doctor</Typography>
-      <Button>Contained</Button>
-    </div>
+    <>
+      <HeroSection />
+    </>
   );
 };
 
