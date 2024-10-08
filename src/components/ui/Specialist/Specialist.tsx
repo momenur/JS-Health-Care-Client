@@ -1,5 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Title from "../common/Title";
 
 const Specialist = async () => {
   const res = await fetch("http://localhost:5000/api/v1/specialties", {
@@ -17,18 +18,12 @@ const Specialist = async () => {
           textAlign: "center",
         }}
       >
-        <Box
-          sx={{
-            textAlign: "start",
-          }}
-        >
-          <Typography variant="h4" fontWeight={500}>
-            Explore Treatments Across Specialties
-          </Typography>
-          <Typography component="p" fontWeight={300} fontSize={18}>
-            Experience Doctors Across AllSpecialties
-          </Typography>
-        </Box>
+        <Title
+          title="Explore Treatments Across Specialties"
+          sub_title=" Experience Doctors Across AllSpecialties"
+          position="start"
+        />
+
         <Stack direction="row" gap={5} mt={5}>
           {specialties?.map((specialty: any) => (
             <Box
