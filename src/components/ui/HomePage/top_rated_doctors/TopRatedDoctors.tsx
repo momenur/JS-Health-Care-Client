@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 import Image from "next/image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
