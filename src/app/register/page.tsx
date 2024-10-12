@@ -1,11 +1,10 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Container, Typography } from "@mui/material";
 
 const RegisterPage = () => {
   return (
-    <Box>
-      <Typography> This is Register Page</Typography>
-    </Box>
+    <Container>
+      <Typography> Hello</Typography>
+    </Container>
   );
 };
 
