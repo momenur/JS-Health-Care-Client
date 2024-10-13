@@ -2,6 +2,7 @@
 
 import assets from "@/assets";
 import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.services";
 import {
   Box,
   Button,
@@ -33,10 +34,11 @@ const LoginPage = () => {
   } = useForm<TLoginData>();
   const onSubmit: SubmitHandler<TLoginData> = async (login_data) => {
     toast("please wait...", { duration: 700 });
+
     try {
       const res = await userLogin(login_data);
-      console.log({ res });
-      if (res?.data) {
+      if (res?.data?.accessToken) {
+        storeUserInfo({ accessToken: res?.data?.accessToken });
         toast.success(res?.message);
         router.push("/");
       }

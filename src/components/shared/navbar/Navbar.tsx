@@ -9,15 +9,20 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 import { navbar_options } from "@/constant/navbar_options";
 import { Button } from "@mui/material";
+import { getUserInfo, isLoggedIn, removeUser } from "@/services/auth.services";
 
 const Navbar = () => {
+  const userInfo = getUserInfo();
+  const isUserLoggedIn = isLoggedIn();
+
+  const handleLogOut = () => {
+    removeUser();
+  };
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -155,9 +160,13 @@ const Navbar = () => {
                 </Typography>
               ))}
             </Box>
-            <Button component={Link} href="/login">
-              Login
-            </Button>
+            {isUserLoggedIn ? (
+              <Button component={Link} href="/login">
+                Login
+              </Button>
+            ) : (
+              <Button onClick={() => handleLogOut()}>Logout</Button>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
