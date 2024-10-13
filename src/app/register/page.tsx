@@ -1,18 +1,10 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/services/actions/registerPatient";
 import { toast } from "sonner";
@@ -21,17 +13,32 @@ import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
 import JSForm from "@/components/forms/JSForm";
 import JSInput from "@/components/forms/JSInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-// type TRegisterObj = {
-//   address: string;
-//   contactNumber: string;
-//   email: string;
-//   name: string;
-// };
-// type Inputs = {
-//   password: string;
-//   patient: TRegisterObj;
-// };
+export const patientValidationSchema = z.object({
+  name: z.string().min(1, "Please enter your name"),
+  email: z.string().email("Please enter a valid email address!"),
+  contactNumber: z
+    .string()
+    .regex(/^\d{11}$/, "Please provide valid phone number"),
+  address: z.string().min(1, "Please enter your address"),
+});
+
+export const validationSchema = z.object({
+  password: z.string().min(6, "Password must be at least 6 character"),
+  patient: patientValidationSchema,
+});
+
+export const defaultValues = {
+  password: "",
+  patient: {
+    name: "",
+    email: "",
+    address: "",
+    contactNumber: "",
+  },
+};
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -105,7 +112,11 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <JSForm onSubmit={handleRegister}>
+            <JSForm
+              onSubmit={handleRegister}
+              resolver={zodResolver(validationSchema)}
+              defaultValues={defaultValues}
+            >
               <Grid container spacing={2}>
                 <Grid item md={12}>
                   <JSInput name="patient.name" label="Name" fullWidth={true} />
@@ -115,7 +126,6 @@ const RegisterPage = () => {
                     name="patient.email"
                     label="Email"
                     type="email"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
