@@ -1,38 +1,22 @@
 "use client";
 
 import assets from "@/assets";
+import JSForm from "@/components/forms/JSForm";
+import JSInput from "@/components/forms/JSInput";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-
-export type TLoginData = {
-  email: string;
-  password: string;
-};
 
 const LoginPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<TLoginData>();
-  const onSubmit: SubmitHandler<TLoginData> = async (login_data) => {
+
+  const handleLogin = async (login_data: FieldValues) => {
     toast("please wait...", { duration: 700 });
 
     try {
@@ -96,25 +80,21 @@ const LoginPage = () => {
           </Stack>
 
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <JSForm onSubmit={handleLogin}>
               <Grid container spacing={2}>
                 <Grid item md={12}>
-                  <TextField
-                    {...register("email")}
+                  <JSInput
+                    name="email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={12}>
-                  <TextField
-                    {...register("password")}
+                  <JSInput
+                    name="password"
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
@@ -131,7 +111,7 @@ const LoginPage = () => {
               >
                 Login
               </Button>
-            </form>
+            </JSForm>
             <Typography>
               Don&apos;t have an account?{" "}
               <Link href="/register">Register Now</Link>

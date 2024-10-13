@@ -12,32 +12,31 @@ import {
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/services/actions/registerPatient";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.services";
+import JSForm from "@/components/forms/JSForm";
+import JSInput from "@/components/forms/JSInput";
 
-type TRegisterObj = {
-  address: string;
-  contactNumber: string;
-  email: string;
-  name: string;
-};
-type Inputs = {
-  password: string;
-  patient: TRegisterObj;
-};
+// type TRegisterObj = {
+//   address: string;
+//   contactNumber: string;
+//   email: string;
+//   name: string;
+// };
+// type Inputs = {
+//   password: string;
+//   patient: TRegisterObj;
+// };
 
 const RegisterPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = async (values) => {
+
+  const handleRegister = async (values: FieldValues) => {
     toast("please wait...", { duration: 700 });
     const data = modifyPayload(values);
     try {
@@ -45,7 +44,14 @@ const RegisterPage = () => {
       console.log(res);
       if (res?.data?.id) {
         toast.success(res?.message);
-        router.push("/login");
+        const result = await userLogin({
+          password: values?.password,
+          email: values?.patient?.email,
+        });
+        if (result?.data?.accessToken) {
+          storeUserInfo({ accessToken: result?.data?.accessToken });
+          router.push("/");
+        }
       }
     } catch (err: any) {
       console.log(err.message);
@@ -99,53 +105,40 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <JSForm onSubmit={handleRegister}>
               <Grid container spacing={2}>
                 <Grid item md={12}>
-                  <TextField
-                    {...register("patient.name")}
-                    label="Name"
-                    variant="outlined"
-                    size="small"
-                    fullWidth={true}
-                  />
+                  <JSInput name="patient.name" label="Name" fullWidth={true} />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
-                    {...register("patient.email")}
+                  <JSInput
+                    name="patient.email"
                     label="Email"
                     type="email"
-                    variant="outlined"
                     size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
-                    {...register("password")}
+                  <JSInput
+                    name="password"
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
-                    {...register("patient.contactNumber")}
+                  <JSInput
+                    name="patient.contactNumber"
                     label="Phone"
                     type="tel"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <TextField
-                    {...register("patient.address")}
+                  <JSInput
+                    name="patient.address"
                     label="Address"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
                   />
                 </Grid>
@@ -159,7 +152,7 @@ const RegisterPage = () => {
               >
                 Register
               </Button>
-            </form>
+            </JSForm>
             <Typography>
               Do you already have an account? <Link href="/login">Login</Link>
             </Typography>

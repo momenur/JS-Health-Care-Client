@@ -13,16 +13,12 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 import { navbar_options } from "@/constant/navbar_options";
-import { Button } from "@mui/material";
-import { getUserInfo, isLoggedIn, removeUser } from "@/services/auth.services";
+import dynamic from "next/dynamic";
 
 const Navbar = () => {
-  const userInfo = getUserInfo();
-  const isUserLoggedIn = isLoggedIn();
-
-  const handleLogOut = () => {
-    removeUser();
-  };
+  const AuthButton = dynamic(() => import("@/app/login/AuthButton"), {
+    ssr: false,
+  });
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -160,13 +156,8 @@ const Navbar = () => {
                 </Typography>
               ))}
             </Box>
-            {isUserLoggedIn ? (
-              <Button component={Link} href="/login">
-                Login
-              </Button>
-            ) : (
-              <Button onClick={() => handleLogOut()}>Logout</Button>
-            )}
+
+            <AuthButton />
           </Toolbar>
         </Container>
       </AppBar>
