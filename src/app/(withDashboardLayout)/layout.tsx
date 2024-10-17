@@ -1,12 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import DashboardDrawer from "@/components/dashboard/dashboard_drawer/DashboardDrawer";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <Box>
-      <Typography>This is Common</Typography>
-      {children}
-    </Box>
-  );
+  return <DashboardDrawer>{children}</DashboardDrawer>;
 };
 
 export default DashboardLayout;
