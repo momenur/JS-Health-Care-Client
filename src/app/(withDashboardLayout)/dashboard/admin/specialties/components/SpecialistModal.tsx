@@ -2,6 +2,7 @@ import JSFileUpload from "@/components/forms/JSFileUploader";
 import JSForm from "@/components/forms/JSForm";
 import JSInput from "@/components/forms/JSInput";
 import JSModal from "@/components/shared/js_modal/JSModal";
+import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 
@@ -10,8 +11,10 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SpecialistModal = ({ open, setOpen }: TProps) => {
-  const handleFormSubmit = (values: FieldValues) => {};
+const SpecialtyModal = ({ open, setOpen }: TProps) => {
+  const handleFormSubmit = (values: FieldValues) => {
+    const data = modifyPayload(values);
+  };
 
   return (
     <JSModal open={open} setOpen={setOpen} title="Create A New Specialty">
@@ -21,7 +24,7 @@ const SpecialistModal = ({ open, setOpen }: TProps) => {
             <JSInput name="title" label="Title" />
           </Grid>
           <Grid item md={6}>
-            <JSFileUpload />
+            <JSFileUpload name="file" label="Upload File" />
           </Grid>
         </Grid>
         <Button sx={{ mt: 2 }} type="submit">
@@ -32,4 +35,4 @@ const SpecialistModal = ({ open, setOpen }: TProps) => {
   );
 };
 
-export default SpecialistModal;
+export default SpecialtyModal;
