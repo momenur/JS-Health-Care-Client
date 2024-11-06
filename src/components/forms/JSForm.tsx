@@ -31,12 +31,14 @@ const JSForm = ({
   }
 
   const methods = useForm(formConfig);
+
   const { handleSubmit, reset } = methods;
+
   const submit: SubmitErrorHandler<FieldValues> = (data) => {
-    console.log(data);
     onSubmit(data);
     reset();
   };
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(submit)}>{children}</form>
