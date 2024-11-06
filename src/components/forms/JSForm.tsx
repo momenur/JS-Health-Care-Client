@@ -22,6 +22,7 @@ const JSForm = ({
   defaultValues,
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
+
   if (resolver) {
     formConfig["resolver"] = resolver;
   }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import Providers from "./lib/Providers/Providers";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,7 @@ export default function RootLayout({
         <body>
           <AppRouterCacheProvider>
             <>
-              <Toaster position="bottom-right" />
+              <Toaster position="bottom-right" duration={6000} />
               {children}
             </>
           </AppRouterCacheProvider>
