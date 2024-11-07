@@ -13,26 +13,21 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+//Create Specialty Functions
 const SpecialtyModal = ({ open, setOpen }: TProps) => {
   const [createSpecialty] = useCreateSpecialtyMutation();
-
   const handleFormSubmit = async (values: FieldValues) => {
     const data = modifyPayload(values);
     try {
-      // Show loading toast
       const loadingToastId = toast.loading("Creating specialty...");
-
       const res = await createSpecialty(data).unwrap();
-
-      // If successful, update the toast with success message
       if (res?.id) {
-        toast.dismiss(loadingToastId); // Dismiss loading toast
+        toast.dismiss(loadingToastId);
         toast.success("Specialty created successfully!");
         setOpen(false);
       }
     } catch (err: any) {
-      // If there's an error, update the toast with error message
-      toast.dismiss(); // Dismiss any active toasts
+      toast.dismiss();
       toast.error("Failed to create specialty: " + err.message);
     }
   };
