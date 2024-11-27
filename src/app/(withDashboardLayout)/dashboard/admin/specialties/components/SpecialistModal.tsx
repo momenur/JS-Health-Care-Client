@@ -13,9 +13,11 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-//Create Specialty Functions
+//Handle Create Specialty Function
 const SpecialtyModal = ({ open, setOpen }: TProps) => {
   const [createSpecialty] = useCreateSpecialtyMutation();
+
+  //Create Specialty Handler Function
   const handleFormSubmit = async (values: FieldValues) => {
     const data = modifyPayload(values);
     try {
