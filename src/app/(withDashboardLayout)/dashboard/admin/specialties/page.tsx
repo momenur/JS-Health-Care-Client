@@ -10,30 +10,46 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import SpecialtyModal from "./components/SpecialistModal";
-import { useGetAllSpecialtyQuery } from "@/redux/api/specialtiesApi";
+import {
+  useDeleteSpecialtyMutation,
+  useGetAllSpecialtyQuery,
+} from "@/redux/api/specialtiesApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { toast } from "sonner";
 
 const SpecialtiesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { data, isLoading } = useGetAllSpecialtyQuery({});
+  const [deleteSpecialty] = useDeleteSpecialtyMutation();
 
   // Handle Delete
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     console.log(id);
+    try {
+      const loadingToastId = toast.loading("Deleting specialty...");
+      const res = await deleteSpecialty(id).unwrap();
+      if (res?.id) {
+        toast.dismiss(loadingToastId);
+        toast.success("Specialty Deleted successfully!");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
+
   //columns
   const columns: GridColDef[] = [
-    { field: "title", headerName: "Title", width: 100 },
+    { field: "title", headerName: "Title", width: 400 },
     {
       field: "icon",
       headerName: "Icon",
-      width: 100,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
           <Box py={1}>
-            <Image alt="Icon" height={25} width={25} src={row?.icon} />
+            <Image alt="Icon" height={30} width={30} src={row?.icon} />
           </Box>
         );
       },
@@ -41,7 +57,9 @@ const SpecialtiesPage = () => {
     {
       field: "Action",
       headerName: "Actions",
-      width: 100,
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
       renderCell: ({ row }) => {
         return (
           <IconButton onClick={() => handleDelete(row?.id)} aria-label="delete">
@@ -51,6 +69,8 @@ const SpecialtiesPage = () => {
       },
     },
   ];
+  // column is end
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -67,7 +87,7 @@ const SpecialtiesPage = () => {
             rows={data}
             columns={columns}
             initialState={{
-              pagination: { paginationModel: { page: 0, pageSize: 5 } },
+              pagination: { paginationModel: { page: 0, pageSize: 10 } },
             }}
             pageSizeOptions={[5, 10]}
             sx={{ border: 0 }}
