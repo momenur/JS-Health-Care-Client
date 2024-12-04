@@ -54,6 +54,7 @@ const SpecialtiesPage = () => {
         );
       },
     },
+
     {
       field: "Action",
       headerName: "Actions",
