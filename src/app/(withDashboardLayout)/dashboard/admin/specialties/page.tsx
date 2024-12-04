@@ -83,7 +83,17 @@ const SpecialtiesPage = () => {
       </Stack>
       {!isLoading ? (
         <Box>
-          <Typography>Display Specialties</Typography>
+          <Typography
+            textAlign="center"
+            color="primary.main"
+            sx={{
+              fontSize: "20px",
+              pt: "20px",
+              pb: "10px",
+            }}
+          >
+            Specialties
+          </Typography>
           <DataGrid
             rows={data}
             columns={columns}
