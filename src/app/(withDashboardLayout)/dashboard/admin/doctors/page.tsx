@@ -10,21 +10,48 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import DoctorModal from "./components/DoctorModal";
-import { useGetAllDoctorsQuery } from "@/redux/api/doctorApi";
+import {
+  useDeleteDoctorMutation,
+  useGetAllDoctorsQuery,
+} from "@/redux/api/doctorApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDebounced } from "@/redux/hooks";
+import { toast } from "sonner";
 
 const DoctorsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  // Search Query
+  const query: Record<string, any> = {};
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 1000,
+  });
+
+  if (!!debouncedTerm) {
+    query["searchTerm"] = searchTerm;
+  }
+
   //Fetching data
-  const { data, isLoading } = useGetAllDoctorsQuery({});
+  const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   const doctors = data?.doctors;
   const meta = data?.meta;
 
   //Handle Doctor delete
+  const [deleteDoctor] = useDeleteDoctorMutation();
   const handleDelete = async (id: string) => {
-    console.log(id);
+    try {
+      const loadingToastId = toast.loading("Deleting Doctor...");
+      const res = await deleteDoctor(id).unwrap();
+      if (res?.id) {
+        toast.dismiss(loadingToastId);
+        toast.success("Doctor Deleted successfully!");
+      }
+    } catch (error: any) {
+      console.error(error?.message);
+    }
   };
 
   //columns
@@ -74,7 +101,11 @@ const DoctorsPage = () => {
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Button onClick={() => setIsModalOpen(true)}>Create Doctor</Button>
         <DoctorModal open={isModalOpen} setOpen={setIsModalOpen} />
-        <TextField size="small" placeholder="Search Doctor" />
+        <TextField
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="small"
+          placeholder="Search Doctor"
+        />
       </Stack>
 
       {!isLoading ? (
