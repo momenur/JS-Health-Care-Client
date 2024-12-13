@@ -13,10 +13,12 @@ import {
 import Title from "../../common/Title";
 import Image from "next/image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import checkImage from "@/assets/doctor-image1.png";
 
 const TopRatedDoctors = async () => {
   const res = await fetch("http://localhost:5000/api/v1/doctor?page=1&limit=3");
   const { data: doctors } = await res.json();
+  console.log({ doctors });
 
   return (
     <Box
