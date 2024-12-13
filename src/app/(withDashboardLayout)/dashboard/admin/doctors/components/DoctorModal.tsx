@@ -11,6 +11,7 @@ import JSSelectField from "@/components/forms/JSSelectFiled";
 import { useCreateDoctorMutation } from "@/redux/api/doctorApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { toast } from "sonner";
+import JSFileUpload from "@/components/forms/JSFileUploader";
 
 type TProps = {
   open: boolean;
@@ -24,6 +25,12 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
     // convert experience and apointmentfee string to number
     values.doctor.experience = Number(values.doctor.experience);
     values.doctor.apointmentFee = Number(values.doctor.apointmentFee);
+
+    if (!values?.doctor?.profilePhoto) {
+      values.doctor.profilePhoto =
+        "https://res.cloudinary.com/drss2rhaa/image/upload/v1734112649/ckcthtigephigbrl017o.jpg";
+    }
+    console.log(values);
 
     const data = modifyPayload(values);
 
@@ -64,6 +71,9 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
     <JSFullScreenModal open={open} setOpen={setOpen} title="Create New Doctor">
       <JSForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={2} sx={{ my: 5 }}>
+          <Grid item xs={12} sm={12} md={12}>
+            <JSFileUpload name="file" label="Upload Doctor Picture" />
+          </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <JSInput
               name="doctor.name"
@@ -167,13 +177,15 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
               sx={{ mb: 2 }}
             />
           </Grid>
-        </Grid>
 
-        <Stack direction="row" justifyContent="end">
-          <Button sx={{ px: "50px" }} type="submit">
-            Create
-          </Button>
-        </Stack>
+          <Grid item xs={12} sm={12} md={12}>
+            <Stack direction="row" justifyContent="center">
+              <Button sx={{ px: "50px", textAlign: "end" }} type="submit">
+                Create
+              </Button>
+            </Stack>
+          </Grid>
+        </Grid>
       </JSForm>
     </JSFullScreenModal>
   );
