@@ -16,6 +16,7 @@ import {
 } from "@/redux/api/doctorApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { useDebounced } from "@/redux/hooks";
 import { toast } from "sonner";
 
@@ -88,9 +89,20 @@ const DoctorsPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <IconButton onClick={() => handleDelete(row?.id)} aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
+          <Box>
+            <IconButton
+              onClick={() => handleDelete(row?.id)}
+              aria-label="delete"
+            >
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => handleDelete(row?.id)}
+              aria-label="delete"
+            >
+              <EditIcon />
+            </IconButton>
+          </Box>
         );
       },
     },
