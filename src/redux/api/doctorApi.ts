@@ -47,11 +47,15 @@ export const doctorApi = baseApi.injectEndpoints({
     }),
 
     updateDoctor: build.mutation({
-      query: (data) => ({
-        url: `/doctor/${data.id}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: [tagTypes.doctor],
+      query: (data) => {
+        console.log(data);
+        return {
+          url: `/doctor/${data.id}`,
+          method: "PATCH",
+          data: data.body,
+        };
+      },
+      invalidatesTags: [tagTypes.doctor, tagTypes.user],
     }),
   }),
 });

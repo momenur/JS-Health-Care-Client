@@ -138,9 +138,9 @@ const DoctorsPage = () => {
             rows={doctors}
             columns={columns}
             initialState={{
-              pagination: { paginationModel: { page: 0, pageSize: 10 } },
+              pagination: { paginationModel: { page: 0, pageSize: 50 } },
             }}
-            pageSizeOptions={[5, 10]}
+            pageSizeOptions={[50, 50]}
             sx={{ border: 0 }}
           />
         </Box>
