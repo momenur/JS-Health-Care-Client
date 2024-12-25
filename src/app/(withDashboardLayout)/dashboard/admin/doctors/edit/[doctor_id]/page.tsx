@@ -37,7 +37,7 @@ const DoctorUpdatePage = ({ params }: TParams) => {
     // const data = modifyPayload(values);
 
     try {
-      const loadingToastId = toast.loading("Creating Doctor...");
+      const loadingToastId = toast.loading("Updating Doctor...");
       const res = await updateDoctor({ id: values.id, body: values }).unwrap();
       console.log(res);
       if (res?.id) {
