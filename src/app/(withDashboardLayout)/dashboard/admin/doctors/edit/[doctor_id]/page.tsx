@@ -45,10 +45,6 @@ const DoctorUpdatePage = ({ params }: TParams) => {
         toast.success("Doctor Updated successfully!", { duration: 3000 });
         router.push("/dashboard/admin/doctors");
       }
-      // const res = await createDoctor(data).unwrap();
-      // console.log(res);
-      // if (res?.id) {
-      // }
     } catch (error: any) {
       console.error(error?.message);
     }
