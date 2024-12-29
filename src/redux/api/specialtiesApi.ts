@@ -23,7 +23,6 @@ const specialtiesApi = baseApi.injectEndpoints({
 
     deleteSpecialty: build.mutation({
       query: (id) => {
-        console.log(id);
         return {
           url: `/specialties/${id}`,
           method: "DELETE",

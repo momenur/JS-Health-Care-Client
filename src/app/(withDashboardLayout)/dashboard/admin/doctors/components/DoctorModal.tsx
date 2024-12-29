@@ -30,14 +30,12 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
       values.doctor.profilePhoto =
         "https://res.cloudinary.com/drss2rhaa/image/upload/v1734112649/ckcthtigephigbrl017o.jpg";
     }
-    console.log(values);
 
     const data = modifyPayload(values);
 
     try {
       const loadingToastId = toast.loading("Creating Doctor...");
       const res = await createDoctor(data).unwrap();
-      console.log(res);
 
       if (res?.id) {
         toast.dismiss(loadingToastId);

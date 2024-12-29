@@ -39,7 +39,7 @@ const DoctorUpdatePage = ({ params }: TParams) => {
     try {
       const loadingToastId = toast.loading("Updating Doctor...");
       const res = await updateDoctor({ id: values.id, body: values }).unwrap();
-      console.log(res);
+
       if (res?.id) {
         toast.dismiss(loadingToastId);
         toast.success("Doctor Updated successfully!", { duration: 3000 });

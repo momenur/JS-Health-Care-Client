@@ -48,7 +48,6 @@ export const doctorApi = baseApi.injectEndpoints({
 
     updateDoctor: build.mutation({
       query: (data) => {
-        console.log(data);
         return {
           url: `/doctor/${data.id}`,
           method: "PATCH",

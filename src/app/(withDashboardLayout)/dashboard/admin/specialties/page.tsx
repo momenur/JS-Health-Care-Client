@@ -26,7 +26,6 @@ const SpecialtiesPage = () => {
 
   // Handle Delete
   const handleDelete = async (id: string) => {
-    console.log(id);
     try {
       const loadingToastId = toast.loading("Deleting specialty...");
       const res = await deleteSpecialty(id).unwrap();

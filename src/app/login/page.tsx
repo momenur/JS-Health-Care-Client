@@ -35,7 +35,6 @@ const LoginPage = () => {
         router.push("/dashboard");
       } else {
         setError(res?.message);
-        console.log(res);
       }
     } catch (err: any) {
       console.log(err);

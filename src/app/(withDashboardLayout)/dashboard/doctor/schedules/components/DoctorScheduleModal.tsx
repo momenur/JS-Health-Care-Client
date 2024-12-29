@@ -40,7 +40,6 @@ const DoctorScheduleModal = ({ open, setOpen }: TProps) => {
       .millisecond(999)
       .toISOString();
   }
-
   const { data } = useGetAllScheduleQuery(query);
   const schedules = data?.schedule;
   const [createDoctorSchedule, { isLoading }] =
