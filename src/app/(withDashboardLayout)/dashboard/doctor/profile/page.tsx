@@ -1,83 +1,46 @@
 "use client";
 
-import { useGetMYProfileQuery } from "@/redux/api/myProfile";
-import { Box, Container, Stack, styled, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import Image from "next/image";
-import React from "react";
+import {
+  useGetMYProfileQuery,
+  useUpdateMYProfileMutation,
+} from "@/redux/api/myProfile";
+import { Container, Typography } from "@mui/material";
 
-const StyledInformationBox = styled(Box)((theme) => ({
-  background: "#f4f7fe",
-  borderRadius: "10px",
-  minWidth: "45%",
-  maxWidth: "50%",
-  padding: "8px 16px",
-  "& p": {
-    fontWeight: 600,
-  },
-}));
+import React from "react";
+import DoctorInformation from "./components/DoctorInformation";
 
 const DoctorProfilePage = () => {
   const { data, isLoading } = useGetMYProfileQuery({});
-  console.log(data);
+
+  const [updateMYProfile, { isLoading: updating }] =
+    useUpdateMYProfileMutation();
+
+  const fileUploadHandler = (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("data", JSON.stringify({}));
+
+    updateMYProfile(formData);
+  };
+
+  if (isLoading) {
+    <p>Loading...</p>;
+  }
+
   if (isLoading) {
     <Typography>loading...</Typography>;
   }
   return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid size={4}>
-          <Box
-            sx={{
-              height: 300,
-              width: "100%",
-              overflow: "hidden",
-            }}
-          >
-            <Image
-              height={300}
-              width={400}
-              src={data?.profilePhoto}
-              alt="User Photo"
-            />
-          </Box>
-        </Grid>
-        <Grid size={8}>
-          <Typography variant="h4" component="h4" color="primary.main">
-            Basic information
-          </Typography>
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            gap={2}
-            flexWrap="wrap"
-          >
-            <StyledInformationBox>
-              <Typography color="secondary" variant="caption">
-                Role
-              </Typography>
-              <Typography>{data?.role}</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography color="secondary" variant="caption">
-                Name
-              </Typography>
-              <Typography>{data?.name}</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography color="secondary" variant="caption">
-                Email
-              </Typography>
-              <Typography>{data?.email}</Typography>
-            </StyledInformationBox>
-            <StyledInformationBox>
-              <Typography color="secondary" variant="caption">
-                Status
-              </Typography>
-              <Typography color="primary.main">{data?.status}</Typography>
-            </StyledInformationBox>
-          </Stack>
-        </Grid>
-      </Grid>
+    <Container
+      sx={{
+        mt: 6,
+      }}
+    >
+      <DoctorInformation
+        data={data}
+        fileUploadHandler={fileUploadHandler}
+        updating={updating}
+      />
     </Container>
   );
 };
