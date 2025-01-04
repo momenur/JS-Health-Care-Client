@@ -4,12 +4,15 @@ import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
 } from "@/redux/api/myProfile";
-import { Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 
-import React from "react";
+import React, { useState } from "react";
 import DoctorInformation from "./components/DoctorInformation";
+import ProfileUpdateModal from "./components/ProfileUpdateModal";
 
 const DoctorProfilePage = () => {
+  const [open, setOpen] = useState(false);
+
   const { data, isLoading } = useGetMYProfileQuery({});
 
   const [updateMYProfile, { isLoading: updating }] =
@@ -31,17 +34,21 @@ const DoctorProfilePage = () => {
     <Typography>loading...</Typography>;
   }
   return (
-    <Container
-      sx={{
-        mt: 6,
-      }}
-    >
-      <DoctorInformation
-        data={data}
-        fileUploadHandler={fileUploadHandler}
-        updating={updating}
-      />
-    </Container>
+    <Box>
+      <ProfileUpdateModal open={open} setOpen={setOpen} id={"id"} />
+      <Container
+        sx={{
+          mt: 6,
+        }}
+      >
+        <DoctorInformation
+          setOpen={setOpen}
+          data={data}
+          fileUploadHandler={fileUploadHandler}
+          updating={updating}
+        />
+      </Container>
+    </Box>
   );
 };
 

@@ -1,5 +1,5 @@
 import AutoFileUploader from "@/components/forms/AutoFileUploader";
-import { Box, Grid, Stack, styled, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, styled, Typography } from "@mui/material";
 import Image from "next/image";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
@@ -14,7 +14,12 @@ const StyledInformationBox = styled(Box)((theme) => ({
   },
 }));
 
-const DoctorInformation = ({ data, updating, fileUploadHandler }: any) => {
+const DoctorInformation = ({
+  data,
+  updating,
+  fileUploadHandler,
+  setOpen,
+}: any) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={4}>
@@ -44,6 +49,7 @@ const DoctorInformation = ({ data, updating, fileUploadHandler }: any) => {
               variant="text"
             />
           )}
+          <Button onClick={() => setOpen(true)}>Edit Profile</Button>
         </Box>
       </Grid>
       <Grid item xs={12} md={8}>
