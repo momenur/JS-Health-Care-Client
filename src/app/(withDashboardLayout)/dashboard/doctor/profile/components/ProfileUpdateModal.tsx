@@ -87,7 +87,6 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       "schedules",
       "doctorSpecialties",
     ];
-
     const updatedValues = Object.fromEntries(
       Object.entries(values).filter(([key]) => {
         return !excludedFields.includes(key);
