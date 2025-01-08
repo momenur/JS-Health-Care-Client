@@ -46,6 +46,7 @@ const TopRatedDoctors = async () => {
                     height={300}
                     width={500}
                     alt="doctor photo"
+                    className="h-80"
                   />
                 </Box>
                 <CardContent>
