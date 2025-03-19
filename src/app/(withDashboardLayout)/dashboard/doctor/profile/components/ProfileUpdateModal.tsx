@@ -18,8 +18,9 @@ import JSForm from "@/components/forms/JSForm";
 import JSInput from "@/components/forms/JSInput";
 import JSSelectField from "@/components/forms/JSSelectFiled";
 import { Gender } from "@/types";
-import MultipleSelectFieldChip from "../../schedules/components/MultipleSelectFieldChip";
 import { useGetAllSpecialtyQuery } from "@/redux/api/specialtiesApi";
+import MultipleSelectChip from "./MultipleSelectChip";
+import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
@@ -56,19 +57,20 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
     if (!isSuccess) return;
 
     setSelectedSpecialtiesIds(
-      doctorData?.doctorSpecialties.map((sp: any) => {
-        return sp.specialtiesId;
+      doctorData?.doctorSpecialties?.map((sp: any) => {
+        return sp?.specialtiesId;
       })
     );
   }, [isSuccess]);
 
   const submitHandler = async (values: FieldValues) => {
-    const specialties = selectedSpecialtiesIds.map((specialtiesId: string) => ({
-      specialtiesId,
-      isDeleted: false,
-    }));
+    const specialties = selectedSpecialtiesIds?.map(
+      (specialtiesId: string) => ({
+        specialtiesId,
+        isDeleted: false,
+      })
+    );
 
-    console.log({ id });
     // return;
 
     const excludedFields: Array<keyof typeof values> = [
@@ -96,7 +98,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
     updatedValues.specialties = specialties;
 
     try {
-      updateDoctor({ body: updatedValues, id });
+      const res = updateDoctor({ body: updatedValues, id });
       await refetch();
       setOpen(false);
     } catch (error) {
@@ -196,7 +198,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-            <MultipleSelectFieldChip
+            <MultipleSelectChip
               allSpecialties={allSpecialties}
               selectedIds={selectedSpecialtiesIds}
               setSelectedIds={setSelectedSpecialtiesIds}
@@ -205,7 +207,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
         </Grid>
 
         <Button type="submit" disabled={updating}>
-          Save
+          Update
         </Button>
       </JSForm>
     </JSFullScreenModal>

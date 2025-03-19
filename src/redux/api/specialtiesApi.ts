@@ -13,6 +13,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.specialties],
     }),
 
+    // get all specialties
     getAllSpecialty: build.query({
       query: () => ({
         url: "/specialties",
@@ -21,6 +22,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.specialties],
     }),
 
+    // delete specialty
     deleteSpecialty: build.mutation({
       query: (id) => {
         return {

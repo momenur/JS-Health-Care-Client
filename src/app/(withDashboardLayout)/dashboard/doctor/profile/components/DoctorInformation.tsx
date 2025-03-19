@@ -2,6 +2,7 @@ import AutoFileUploader from "@/components/forms/AutoFileUploader";
 import { Box, Button, Grid, Stack, styled, Typography } from "@mui/material";
 import Image from "next/image";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const StyledInformationBox = styled(Box)((theme) => ({
   background: "#f4f7fe",
@@ -47,9 +48,16 @@ const DoctorInformation = ({
               icon={<CloudUploadIcon />}
               onFileUpload={fileUploadHandler}
               variant="text"
+              sx={{ border: "1px solid #ADD8E6", width: "100%", mb: "16px" }}
             />
           )}
-          <Button onClick={() => setOpen(true)}>Edit Profile</Button>
+          <Button
+            startIcon={<EditOutlinedIcon />}
+            fullWidth
+            onClick={() => setOpen(true)}
+          >
+            Edit Profile
+          </Button>
         </Box>
       </Grid>
       <Grid item xs={12} md={8}>

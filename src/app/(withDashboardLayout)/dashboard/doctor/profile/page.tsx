@@ -35,7 +35,7 @@ const DoctorProfilePage = () => {
   }
   return (
     <Box>
-      <ProfileUpdateModal open={open} setOpen={setOpen} id={"id"} />
+      <ProfileUpdateModal open={open} setOpen={setOpen} id={data?.id} />
       <Container
         sx={{
           mt: 6,
