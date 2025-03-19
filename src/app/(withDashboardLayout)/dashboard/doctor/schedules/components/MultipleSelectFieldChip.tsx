@@ -89,7 +89,7 @@ export default function MultipleSelectFieldChip({
           )}
           MenuProps={MenuProps}
         >
-          {schedules.map((schedule: any) => (
+          {schedules?.map((schedule: any) => (
             <MenuItem
               key={schedule?.id}
               value={schedule?.id}

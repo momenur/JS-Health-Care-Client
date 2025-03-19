@@ -16,7 +16,7 @@ const DoctorSchedulePage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(10);
 
   query["page"] = page;
   query["limit"] = limit;
@@ -69,9 +69,10 @@ const DoctorSchedulePage = () => {
     },
   ];
   return (
-    <Box>
-      <Typography>This is Doctor Schedule Page</Typography>
-      <Button onClick={() => setIsModalOpen(true)}>Create Schedule</Button>
+    <Box mt={3}>
+      <Button onClick={() => setIsModalOpen(true)} sx={{ mb: 1 }}>
+        Create Schedule
+      </Button>
       <DoctorScheduleModal open={isModalOpen} setOpen={setIsModalOpen} />
 
       <Box>

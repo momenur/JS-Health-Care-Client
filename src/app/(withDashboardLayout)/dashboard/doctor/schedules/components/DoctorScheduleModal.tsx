@@ -27,6 +27,7 @@ const DoctorScheduleModal = ({ open, setOpen }: TProps) => {
   const [selectedSchedulesIds, setSelectedSchedulesIds] = useState<string[]>(
     []
   );
+  console.log(selectedSchedulesIds);
   const query: Record<string, any> = {};
   if (!!selectedDate) {
     query["startDate"] = dayjs(selectedDate)
