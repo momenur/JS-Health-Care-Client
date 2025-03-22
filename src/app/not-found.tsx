@@ -5,7 +5,7 @@ const NotFoundPage = () => {
   return (
     <Box>
       <Typography> THIS IS NOT FOUND PAGE</Typography>
-      <Typography> 404...!!! NOT FOUND PAGE</Typography>
+      <Typography> No page found form this route</Typography>
     </Box>
   );
 };
