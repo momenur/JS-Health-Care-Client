@@ -9,6 +9,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ISchedule } from "@/types/schedule";
 import { dateFormatter } from "@/utils/dateFormater";
 import dayjs from "dayjs";
+import AddIcon from "@mui/icons-material/Add";
 
 const DoctorSchedulePage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -64,7 +65,11 @@ const DoctorSchedulePage = () => {
   ];
   return (
     <Box mt={3}>
-      <Button onClick={() => setIsModalOpen(true)} sx={{ mb: 1 }}>
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        sx={{ mb: 1 }}
+        startIcon={<AddIcon />}
+      >
         Create Schedule
       </Button>
       <DoctorScheduleModal open={isModalOpen} setOpen={setIsModalOpen} />
