@@ -13,16 +13,10 @@ import dayjs from "dayjs";
 const DoctorSchedulePage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const query: Record<string, any> = {};
-
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-
-  query["page"] = page;
-  query["limit"] = limit;
+  const [pagination, setPagination] = useState({ page: 1, limit: 5 });
 
   const [allSchedule, setAllSchedule] = useState<any>([]);
-  const { data, isLoading } = useGetAllDoctorSchedulesQuery({ ...query });
+  const { data, isLoading } = useGetAllDoctorSchedulesQuery({ ...pagination });
 
   const schedules = data?.doctorSchedules;
   const meta = data?.meta;
@@ -30,11 +24,11 @@ const DoctorSchedulePage = () => {
   let pageCount: number;
 
   if (meta?.total) {
-    pageCount = Math.ceil(meta.total / limit);
+    pageCount = Math.ceil(meta.total / pagination?.limit);
   }
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    setPagination((prev) => ({ ...prev, page: value }));
   };
 
   useEffect(() => {
@@ -95,7 +89,7 @@ const DoctorSchedulePage = () => {
                       <Pagination
                         color="primary"
                         count={pageCount}
-                        page={page}
+                        page={pagination?.page}
                         onChange={handleChange}
                       />
                     </Box>
