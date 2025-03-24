@@ -3,17 +3,23 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+type TRole = keyof typeof roleBasedPrivateRoutes;
+
+const AuthRoute = ["/login", "/register"];
+
 const commonPrivateRoutes = [
   "/dashboard",
   "/dashboard/change-password",
   "/doctors",
 ];
+
 const roleBasedPrivateRoutes = {
   PATIENT: [/^\/dashboard\/patient/],
   DOCTOR: [/^\/dashboard\/doctor/],
   ADMIN: [/^\/dashboard\/admin/],
   SUPER_ADMIN: [/^\/dashboard\/super-admin/],
 };
+
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const { pathname } = request?.nextUrl;
@@ -21,6 +27,10 @@ export function middleware(request: NextRequest) {
   const accessToken = cookies().get("accessToken")?.value;
 
   if (!accessToken) {
+    // handle login and register route
+    if (AuthRoute?.includes(pathname)) {
+      return NextResponse.next();
+    }
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -43,12 +53,9 @@ export function middleware(request: NextRequest) {
   //   if (role === "PATIENT" && pathname.startsWith("/dashboard/patient")) {
   //     return NextResponse.next();
   //   }
-  if (
-    role &&
-    roleBasedPrivateRoutes[role as keyof typeof roleBasedPrivateRoutes]
-  ) {
-    const routes =
-      roleBasedPrivateRoutes[role as keyof typeof roleBasedPrivateRoutes];
+
+  if (role && roleBasedPrivateRoutes[role as TRole]) {
+    const routes = roleBasedPrivateRoutes[role as TRole];
     if (routes.some((route) => pathname.match(route))) {
       return NextResponse.next();
     }
@@ -59,5 +66,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/dashboard/:path*",
+  matcher: ["/dashboard/:path*", "/login", "/register"],
 };
