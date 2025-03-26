@@ -14,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
-import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -24,11 +23,10 @@ export const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
 });
 
-const LoginPage = () => {
-  const [error, setError] = useState("");
+const ForgotPasswordPage = () => {
   const [forgotPassword, { isSuccess }] = useForgotPasswordMutation();
 
-  const handleLogin = async (data: FieldValues) => {
+  const handleForgotPassword = async (data: FieldValues) => {
     console.log(data);
     toast("please wait...", { duration: 700 });
 
@@ -102,11 +100,10 @@ const LoginPage = () => {
               </Alert>
             ) : (
               <JSForm
-                onSubmit={handleLogin}
+                onSubmit={handleForgotPassword}
                 resolver={zodResolver(validationSchema)}
                 defaultValues={{
                   email: "",
-                  password: "",
                 }}
               >
                 <Grid container spacing={2}>
@@ -138,4 +135,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;
