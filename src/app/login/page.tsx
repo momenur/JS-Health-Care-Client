@@ -123,9 +123,16 @@ const LoginPage = () => {
                   />
                 </Grid>
               </Grid>
-              <Typography textAlign="end" fontWeight={300} pt={1}>
-                Forgot Password
-              </Typography>
+
+              <Link href="forgot-password">
+                <Typography
+                  sx={{ textAlign: "end", cursor: "pointer" }}
+                  fontWeight={300}
+                  pt={1}
+                >
+                  Forgot Password
+                </Typography>
+              </Link>
               <Button
                 sx={{
                   margin: "20px 0",
