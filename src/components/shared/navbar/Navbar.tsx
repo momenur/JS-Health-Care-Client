@@ -14,8 +14,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 import { navbar_options } from "@/constant/navbar_options";
 import dynamic from "next/dynamic";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const Navbar = () => {
+  const userInfo = useUserInfo();
   const AuthButton = dynamic(() => import("@/app/login/AuthButton"), {
     ssr: false,
   });
@@ -117,6 +119,15 @@ const Navbar = () => {
                     </Typography>
                   </MenuItem>
                 ))}
+                {userInfo?.userId && (
+                  <Typography
+                    component={Link}
+                    href="/dashboard"
+                    sx={{ textAlign: "center" }}
+                  >
+                    Dashboard
+                  </Typography>
+                )}
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -155,6 +166,21 @@ const Navbar = () => {
                   {page?.path_name}
                 </Typography>
               ))}
+              {userInfo?.userId && (
+                <Typography
+                  component={Link}
+                  href="/dashboard"
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    px: 2,
+                    display: "block",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  Dashboard
+                </Typography>
+              )}
             </Box>
 
             <AuthButton />
