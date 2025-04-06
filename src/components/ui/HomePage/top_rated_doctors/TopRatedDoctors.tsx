@@ -13,6 +13,7 @@ import {
 import Title from "../../common/Title";
 import Image from "next/image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Link from "next/link";
 
 const TopRatedDoctors = async () => {
   const res = await fetch("http://localhost:5000/api/v1/doctor?page=1&limit=3");
@@ -93,9 +94,11 @@ const TopRatedDoctors = async () => {
             textAlign: "center",
           }}
         >
-          <Button sx={{ mt: "30px" }} variant="outlined">
-            view all
-          </Button>
+          <Link href="/doctors">
+            <Button sx={{ mt: "30px" }} variant="outlined">
+              view all
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>
