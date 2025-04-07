@@ -13,15 +13,16 @@ const Doctors = async ({ searchParams }: PropType) => {
 
   const { data } = await res.json();
 
-  console.log(data, "====================================>");
-
   return (
-    <Container>
-      <DashedLine />
+    <Container
+      sx={{
+        my: 6,
+      }}
+    >
       {data?.map((doctor: Doctor, index: number) => (
-        <Box key={doctor?.id} sx={{ bgcolor: "#f5f5f5" }}>
+        <Box key={doctor?.id} sx={{ bgcolor: "#f0f0f0", padding: 3 }}>
           <DoctorCard doctor={doctor} />
-          {index < data?.length && <DashedLine />}
+          {index + 1 < data?.length && <DashedLine />}
         </Box>
       ))}
     </Container>

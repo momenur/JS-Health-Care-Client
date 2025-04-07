@@ -8,12 +8,12 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
   return (
-    <Stack direction="row" gap={2}>
+    <Stack direction="row" gap={1}>
       <Stack
         direction="row"
         flex={1}
         gap={3}
-        sx={{ height: 235, bgcolor: "white", p: 3 }}
+        sx={{ height: 235, bgcolor: "white", p: 3, borderRadius: 1 }}
       >
         <Box sx={{ width: 190, height: 190, bgcolor: "#808080" }}>
           <Image
@@ -50,7 +50,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
           <Box
             sx={{
               borderBottom: "1px dashed",
-              borderColor: "primary.main",
+              borderColor: "#c0c4c3",
               my: 3,
             }}
           />
@@ -86,7 +86,15 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
           </Stack>
         </Stack>
       </Stack>
-      <Stack sx={{ height: 235, bgcolor: "white", width: "400px", p: 3 }}>
+      <Stack
+        sx={{
+          height: 235,
+          bgcolor: "white",
+          width: "400px",
+          p: 3,
+          borderRadius: 1,
+        }}
+      >
         <Box flex={1}>
           <Typography color="secondary.main">Working in</Typography>
           <Typography sx={{ fontWeight: "600", mt: "3px" }}>
@@ -96,7 +104,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
         <Box
           sx={{
             borderBottom: "1px dashed",
-            borderColor: "primary.main",
+            borderColor: "#c0c4c3",
             my: "22px",
           }}
         />

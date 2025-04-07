@@ -49,7 +49,7 @@ const Footer = () => {
           py={2}
         >
           <Typography color="#fff" component="p">
-            &copy; 2024 JS Doctor. All Rights Reserved
+            &copy; {new Date().getFullYear()} JS Doctor. All Rights Reserved
           </Typography>
           <Typography
             variant="h5"

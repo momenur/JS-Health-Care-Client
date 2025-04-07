@@ -5,7 +5,7 @@ import React from "react";
 
 const StyledDashedLine = styled(Box)(({ theme }) => ({
   borderBottom: "1px solid",
-  borderColor: theme.palette.primary.main,
+  borderColor: "#c0c4c3",
   marginTop: theme.spacing(4),
   marginBottom: theme.spacing(4),
 }));
