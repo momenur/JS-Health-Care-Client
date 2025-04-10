@@ -1,4 +1,4 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Title from "../../common/Title";
 
@@ -24,45 +24,48 @@ const Specialist = async () => {
           position="start"
         />
 
-        <Stack direction="row" gap={5} mt={5}>
+        <Grid container spacing={5} mt={5}>
           {specialties?.slice(0, 6)?.map((specialty: any) => (
-            <Box
+            <Grid
+              item
               key={specialty?.id}
-              sx={{
-                flex: 1,
-                width: "150px",
-                backgroundColor: "rgba(245, 245, 245, 1)",
-                border: "1px solid rgba(250, 250, 250, 1),",
-                borderRadius: "10px",
-                padding: "40px 10px",
-                "& img": {
-                  width: "50px",
-                  height: "50px",
-                  margin: "0 auto",
-                },
-                "&:hover": {
-                  border: "1px solid #1586FD",
-                  borderRadius: "10px",
-                  transition: "all",
-                  transitionDuration: "0.4s",
-                  padding: "40px 10px",
-                },
-              }}
+              xs={6} // 12 / 6 = 2 columns on extra-small and small screens
+              md={4} // 12 / 4 = 3 columns on medium screens
+              lg={2} // 12 / 2 = 6 columns on large screens
             >
-              <Image
-                src={specialty.icon}
-                height={70}
-                width={70}
-                alt="specialty icon"
-              />
-              <Box>
-                <Typography textAlign="center" pt={2}>
-                  {specialty?.title}
-                </Typography>
+              <Box
+                sx={{
+                  width: "100%",
+                  backgroundColor: "rgba(245, 245, 245, 1)",
+                  border: "1px solid rgba(250, 250, 250, 1)",
+                  borderRadius: "10px",
+                  padding: "40px 10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  "& img": {
+                    width: "50px",
+                    height: "50px",
+                  },
+                  "&:hover": {
+                    border: "1px solid #1586FD",
+                    transition: "all 0.4s",
+                  },
+                }}
+              >
+                <Image
+                  src={specialty.icon}
+                  height={70}
+                  width={70}
+                  alt="specialty icon"
+                />
+                <Typography pt={2}>{specialty?.title}</Typography>
               </Box>
-            </Box>
+            </Grid>
           ))}
-        </Stack>
+        </Grid>
+
         <Button sx={{ mt: "30px" }} variant="outlined">
           view all
         </Button>

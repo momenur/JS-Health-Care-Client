@@ -7,7 +7,11 @@ const HeroSection = () => {
     <Container
       sx={{
         display: "flex",
-        direction: "row",
+        flexDirection: {
+          xs: "column",
+          md: "column",
+          lg: "row",
+        },
         my: 16,
       }}
     >
@@ -20,7 +24,11 @@ const HeroSection = () => {
         <Box
           sx={{
             position: "absolute",
-            width: "700px",
+            width: {
+              sx: "200px",
+              md: "400px",
+              lg: "700px",
+            },
             top: "-90px",
             left: "-120px",
           }}
