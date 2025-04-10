@@ -22,9 +22,18 @@ const TopRatedDoctors = async () => {
   return (
     <Box
       sx={{
-        py: 24,
+        py: {
+          xs: 10,
+          md: 14,
+          lg: 24,
+        },
         backgroundColor: "rgba(20, 20, 20, 0.1)",
-        clipPath: "polygon(0 0, 100% 25%, 100% 100%, 0 75%)",
+        clipPath: {
+          xs: "none",
+          sm: "none",
+          md: "none",
+          lg: "polygon(0 0, 100% 25%, 100% 100%, 0 75%)",
+        },
       }}
     >
       <Title
@@ -32,56 +41,92 @@ const TopRatedDoctors = async () => {
         sub_title="Access to expert physicians and surgeons, advanced technology"
         sub_sub_title="and top-quality surgery facilities right here"
       />
-      <Container
-        sx={{
-          margin: "50px auto",
-        }}
-      >
-        <Grid container spacing={2}>
+
+      <Container sx={{ mt: { xs: 5, md: 8, lg: 10 } }}>
+        <Grid container spacing={{ xs: 2, md: 3, lg: 4 }}>
           {doctors.map((doctor: any) => (
-            <Grid item xs={12} sm={6} md={4} key={doctor?.id}>
-              <Card>
-                <Box>
+            <Grid item xs={12} sm={6} lg={4} key={doctor?.id}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box
+                  sx={{
+                    height: "250px", // fixed height
+                    overflow: "hidden", // hide overflow if image is larger
+                  }}
+                >
                   <Image
                     src={doctor?.profilePhoto}
                     height={300}
                     width={500}
                     alt="doctor photo"
-                    className="h-72"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
                   />
                 </Box>
+
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h6" component="div">
                     {doctor?.name}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
+
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "text.secondary", mb: 1 }}
+                  >
                     {doctor?.qualification}, {doctor?.designation}
                   </Typography>
+
                   <Stack
                     mt={1}
-                    marginLeft={-0.5}
-                    direction="row"
+                    spacing={1}
+                    direction={{
+                      xs: "column",
+                      md: "column",
+                      lg: "row",
+                    }}
                     justifyContent="space-between"
-                    alignItems="center"
                   >
-                    <Typography sx={{ color: "text.secondary" }}>
-                      <LocationOnIcon />
-                      {doctor?.address},
+                    <Typography
+                      sx={{
+                        color: "text.secondary",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <LocationOnIcon sx={{ mr: 0.5 }} />
+                      {doctor?.address}
                     </Typography>
                     <Typography color="primary.main">
                       Fee: {doctor?.apointmentFee}
                     </Typography>
                   </Stack>
                 </CardContent>
+
                 <CardActions
                   sx={{
-                    justifyContent: "space-between",
                     px: 2,
                     pb: 3,
+                    flexDirection: {
+                      xs: "column",
+                      md: "row",
+                    },
+                    gap: 1.5,
+                    alignItems: "stretch",
                   }}
                 >
-                  <Button size="small">Book Now</Button>
-                  <Button variant="outlined" size="small">
+                  <Button fullWidth size="small">
+                    Book Now
+                  </Button>
+                  <Button fullWidth variant="outlined" size="small">
                     View Profile
                   </Button>
                 </CardActions>
@@ -89,15 +134,10 @@ const TopRatedDoctors = async () => {
             </Grid>
           ))}
         </Grid>
-        <Box
-          sx={{
-            textAlign: "center",
-          }}
-        >
+
+        <Box textAlign="center" mt={{ xs: 4, md: 6 }}>
           <Link href="/doctors">
-            <Button sx={{ mt: "30px" }} variant="outlined">
-              view all
-            </Button>
+            <Button variant="outlined">View All</Button>
           </Link>
         </Box>
       </Container>
