@@ -14,10 +14,10 @@ const WhyUs = () => {
             component="h1"
             fontWeight={700}
           >
-            Why Us
+            Why us
           </Typography>
           <Typography variant="h4" component="h1" fontWeight={700}>
-            Why Choose Us
+            Why choose us
           </Typography>
         </Box>
         <Grid container spacing={2} my={6} alignItems="center">
