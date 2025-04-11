@@ -5,22 +5,18 @@ export const navbar_options = [
   },
   {
     path_name: "doctors",
-    path: "/",
+    path: "/doctors",
   },
   {
     path_name: "service",
-    path: "/",
+    path: "/service",
   },
   {
     path_name: "about",
-    path: "/",
+    path: "/about",
   },
   {
     path_name: "contact",
-    path: "/",
-  },
-  {
-    path_name: "contact",
-    path: "/",
+    path: "/contact",
   },
 ];

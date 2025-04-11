@@ -108,17 +108,20 @@ const Navbar = () => {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
-                {navbar_options.map((page, index) => (
-                  <MenuItem key={index} onClick={handleCloseNavMenu}>
-                    <Typography
-                      component={Link}
-                      href={page?.path}
-                      sx={{ textAlign: "center" }}
-                    >
-                      {page?.path_name}
-                    </Typography>
-                  </MenuItem>
-                ))}
+                {navbar_options.map((page, index) => {
+                  console.log({ page });
+                  return (
+                    <MenuItem key={index} onClick={handleCloseNavMenu}>
+                      <Typography
+                        component={Link}
+                        href={page?.path}
+                        sx={{ textAlign: "center" }}
+                      >
+                        {page?.path_name}
+                      </Typography>
+                    </MenuItem>
+                  );
+                })}
                 {userInfo?.userId && (
                   <Typography
                     component={Link}
@@ -153,7 +156,7 @@ const Navbar = () => {
               {navbar_options.map((page, index) => (
                 <Typography
                   component={Link}
-                  href=""
+                  href={page?.path}
                   key={index}
                   onClick={handleCloseNavMenu}
                   sx={{
