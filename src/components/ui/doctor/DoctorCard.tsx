@@ -1,128 +1,374 @@
-import { Doctor } from "@/types/doctor";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  Typography,
+  Button,
+  Chip,
+  Divider,
+  IconButton,
+} from "@mui/material";
+import {
+  LocalHospital,
+  WorkOutline,
+  AccessTime,
+  Favorite,
+  Share,
+  VerifiedUser,
+  AttachMoney,
+  ArrowForward,
+} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
+
+export type Doctor = {
+  id: string;
+  name: string;
+  profilePhoto: string;
+  designation: string;
+  doctorSpecialties?: { specialties: { title: string } }[];
+  apointmentFee: number;
+  currentWorkingPlace: string;
+  experience: number;
+};
 
 const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
   const placeholder =
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
+  // Extract specialties as an array of strings
+  const specialties =
+    doctor?.doctorSpecialties?.map(
+      (specialty) => specialty?.specialties?.title
+    ) || [];
+  console.log(doctor);
   return (
-    <Stack direction="row" gap={1}>
-      <Stack
-        direction="row"
-        flex={1}
-        gap={3}
-        sx={{ height: 235, bgcolor: "white", p: 3, borderRadius: 1 }}
-      >
-        <Box sx={{ width: 190, height: 190, bgcolor: "#808080" }}>
-          <Image
-            src={doctor?.profilePhoto ? doctor.profilePhoto : placeholder}
-            alt="doctor image"
-            width={190}
-            height={190}
-            style={{
-              height: "190px",
-            }}
-          />
-        </Box>
-        <Stack flex={1} justifyContent="space-between">
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="h6" fontWeight={600}>
-              {doctor?.name}
-            </Typography>
-            <Typography sx={{ my: "2px", color: "secondary.main" }}>
-              {doctor?.designation}
-            </Typography>
-            <Typography
-              noWrap
-              sx={{ color: "secondary.main", maxWidth: "45ch" }}
-            >
-              {doctor?.doctorSpecialties?.length
-                ? "Specialties in" +
-                  " " +
-                  doctor?.doctorSpecialties?.map(
-                    (specialty) => specialty?.specialties?.title
-                  )
-                : ""}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              borderBottom: "1px dashed",
-              borderColor: "#c0c4c3",
-              my: 3,
-            }}
-          />
-          <Stack direction="row" justifyContent="space-between">
-            <Box>
-              <Stack direction="row" alignItems="center">
-                <Typography
-                  variant="h6"
-                  sx={{ color: "primary.main", fontWeight: "600" }}
-                >
-                  Taka : {doctor?.apointmentFee}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{
-                    display: "inline",
-                    ml: 1,
-                    color: "secondary.main",
-                  }}
-                >
-                  (incl. Vat)
-                </Typography>
-              </Stack>
-              <Typography variant="caption" color="secondary.main">
-                Per consultation
-              </Typography>
-            </Box>
-            <Box>
-              <Link href={`/checkout/${doctor?.id}`}>
-                <Button>Book Now</Button>
-              </Link>
-            </Box>
-          </Stack>
-        </Stack>
-      </Stack>
-      <Stack
+    <Card
+      sx={{
+        maxWidth: "100%",
+        borderRadius: "16px",
+        overflow: "visible",
+        background: "linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%)",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
+        position: "relative",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        "&:hover": {
+          transform: "translateY(-8px)",
+          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+        },
+      }}
+    >
+      {/* Status Badge */}
+      <Box
         sx={{
-          height: 235,
-          bgcolor: "white",
-          width: "400px",
-          p: 3,
-          borderRadius: 1,
+          position: "absolute",
+          top: 20,
+          right: 20,
+          zIndex: 2,
+          display: "flex",
+          alignItems: "center",
+          gap: 0.5,
+          bgcolor: "rgba(46, 196, 182, 0.9)",
+          color: "white",
+          py: 0.5,
+          px: 1.5,
+          borderRadius: "20px",
+          fontSize: "0.75rem",
+          fontWeight: 600,
+          backdropFilter: "blur(5px)",
         }}
       >
-        <Box flex={1}>
-          <Typography color="secondary.main">Working in</Typography>
-          <Typography sx={{ fontWeight: "600", mt: "3px" }}>
-            {doctor?.currentWorkingPlace}
-          </Typography>
-        </Box>
+        <VerifiedUser sx={{ fontSize: 14 }} />
+        Verified
+      </Box>
+
+      {/* Card Content */}
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
+        {/* Left Section - Image */}
         <Box
           sx={{
-            borderBottom: "1px dashed",
-            borderColor: "#c0c4c3",
-            my: "22px",
+            position: "relative",
+            width: { xs: "100%", md: "280px" },
+            height: { xs: "280px", md: "100%" },
+            overflow: "hidden",
+            borderRadius: { xs: "16px 16px 0 0", md: "16px 0 0 16px" },
           }}
-        />
-        <Stack direction="row" justifyContent="space-between">
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%)",
+              zIndex: 1,
+            }}
+          />
+          <Box
+            component="img"
+            src={doctor?.profilePhoto || placeholder}
+            alt="Our Clinic Building"
+            sx={{
+              width: "100%",
+              height: "250px",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+            }}
+          />
+
+          {/* Social Actions */}
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 16,
+              left: 16,
+              zIndex: 2,
+              display: "flex",
+              gap: 1,
+            }}
+          >
+            <IconButton
+              size="small"
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.2)",
+                backdropFilter: "blur(10px)",
+                color: "white",
+                "&:hover": { bgcolor: "rgba(255, 255, 255, 0.3)" },
+              }}
+            >
+              <Favorite fontSize="small" />
+            </IconButton>
+            <IconButton
+              size="small"
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.2)",
+                backdropFilter: "blur(10px)",
+                color: "white",
+                "&:hover": { bgcolor: "rgba(255, 255, 255, 0.3)" },
+              }}
+            >
+              <Share fontSize="small" />
+            </IconButton>
+          </Box>
+        </Box>
+
+        {/* Right Section - Content */}
+        <Box
+          sx={{
+            flex: 1,
+            p: 3,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* Doctor Info */}
           <Box>
-            <Typography color="secondary.main">Total Experience</Typography>
-            <Typography variant="h6" sx={{ fontWeight: "600" }}>
-              {doctor?.experience}+ Years
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 0.5,
+                color: "#2d3748",
+                fontSize: { xs: "1.25rem", md: "1.5rem" },
+              }}
+            >
+              Dr. {doctor?.name}
             </Typography>
+
+            <Typography
+              variant="subtitle1"
+              sx={{
+                color: "#4a5568",
+                fontWeight: 500,
+                mb: 2,
+                fontSize: "1rem",
+              }}
+            >
+              {doctor?.designation}
+            </Typography>
+
+            {/* Specialties */}
+            <Box sx={{ mb: 3 }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "#718096",
+                  mb: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                }}
+              >
+                <LocalHospital fontSize="small" color="primary" />
+                Specialties
+              </Typography>
+
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                {specialties.length > 0 ? (
+                  specialties.map((specialty, index) => (
+                    <Chip
+                      key={index}
+                      label={specialty}
+                      size="small"
+                      sx={{
+                        bgcolor: "rgba(66, 153, 225, 0.1)",
+                        color: "#3182ce",
+                        fontWeight: 500,
+                        borderRadius: "8px",
+                      }}
+                    />
+                  ))
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    No specialties listed
+                  </Typography>
+                )}
+              </Box>
+            </Box>
+
+            {/* Work & Experience */}
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: { xs: 2, md: 4 },
+                mb: 3,
+              }}
+            >
+              <Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#718096",
+                    mb: 0.5,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                  }}
+                >
+                  <WorkOutline fontSize="small" color="primary" />
+                  Working at
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#2d3748",
+                  }}
+                >
+                  {doctor?.currentWorkingPlace}
+                </Typography>
+              </Box>
+
+              <Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#718096",
+                    mb: 0.5,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                  }}
+                >
+                  <AccessTime fontSize="small" color="primary" />
+                  Experience
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#2d3748",
+                  }}
+                >
+                  {doctor?.experience}+ Years
+                </Typography>
+              </Box>
+            </Box>
           </Box>
-          <Box>
-            <Button component={Link} href={`/doctors/${doctor.id}`}>
-              View Details
-            </Button>
+
+          <Divider sx={{ my: 2, opacity: 0.6 }} />
+
+          {/* Actions */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <Typography variant="body2" sx={{ color: "#718096", mb: 0.5 }}>
+                Consultation Fee
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                <AttachMoney color="primary" />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 700,
+                    color: "#2d3748",
+                  }}
+                >
+                  {doctor?.apointmentFee} Taka
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <Link
+                href={`/doctors/${doctor.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    px: 2,
+                    borderWidth: "1.5px",
+                    "&:hover": {
+                      borderWidth: "1.5px",
+                    },
+                  }}
+                >
+                  View Profile
+                </Button>
+              </Link>
+
+              <Link
+                href={`/checkout/${doctor.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={<ArrowForward />}
+                  sx={{
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    px: 2,
+                    boxShadow: "0 4px 14px rgba(66, 153, 225, 0.4)",
+                    background:
+                      "linear-gradient(45deg, #4299e1 0%, #63b3ed 100%)",
+                    "&:hover": {
+                      boxShadow: "0 6px 20px rgba(66, 153, 225, 0.6)",
+                    },
+                  }}
+                >
+                  Book Now
+                </Button>
+              </Link>
+            </Box>
           </Box>
-        </Stack>
-      </Stack>
-    </Stack>
+        </Box>
+      </Box>
+    </Card>
   );
 };
 

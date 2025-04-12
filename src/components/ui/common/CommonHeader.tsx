@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Container,
@@ -13,7 +15,6 @@ type TProps = {
 
 const CommonHeader = ({ title, subTitle }: TProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       className="w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 md:py-24"
