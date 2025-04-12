@@ -29,6 +29,7 @@ import {
   ArrowForward as ArrowForwardIcon,
 } from "@mui/icons-material";
 import type React from "react";
+import CommonHeader from "@/components/ui/common/CommonHeader";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -211,50 +212,11 @@ const AboutUsPage = () => {
   return (
     <Box className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <Box
-        className="w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 md:py-24"
-        sx={{
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)",
-            zIndex: 1,
-          }}
-        />
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <Typography
-            variant={isMobile ? "h3" : "h2"}
-            className="font-bold text-center mb-4"
-            sx={{
-              textShadow: "0 2px 4px rgba(0,0,0,0.2)",
-              fontWeight: 800,
-            }}
-          >
-            About Our Clinic
-          </Typography>
-          <Typography
-            variant={isMobile ? "body1" : "h6"}
-            className="text-center max-w-2xl mx-auto"
-            sx={{
-              opacity: 0.9,
-              fontWeight: 400,
-            }}
-          >
-            Providing exceptional healthcare with compassion and expertise for
-            over 20 years
-          </Typography>
-        </Container>
-      </Box>
+      <CommonHeader
+        title="About our clinic"
+        subTitle=" Providing exceptional healthcare with compassion and expertise for
+            over 20 years. We are expert on Cardiology, Urology, Orthopedic, Dentist, Ophthalmology, neurology."
+      />
 
       {/* Our Story Section */}
       <Container
@@ -265,7 +227,7 @@ const AboutUsPage = () => {
           <Grid item xs={12} md={6}>
             <Box
               component="img"
-              src="/placeholder.svg?height=500&width=600"
+              src="https://media.gettyimages.com/id/1312706504/photo/modern-hospital-building.jpg?s=612x612&w=0&k=20&c=DT6YDRZMH5G5dL-Qv6VwPpVDpIDxJqkAY4Gg0ojGi58="
               alt="Our Clinic Building"
               sx={{
                 width: "100%",

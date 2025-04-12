@@ -38,6 +38,7 @@ import {
   HealthAndSafety as HealthAndSafetyIcon,
   CreditCard as CreditCardIcon,
 } from "@mui/icons-material";
+import CommonHeader from "@/components/ui/common/CommonHeader";
 
 interface ServiceCategory {
   id: number;
@@ -359,50 +360,11 @@ const ServicePage = () => {
   return (
     <Box className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <Box
-        className="w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 md:py-24"
-        sx={{
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)",
-            zIndex: 1,
-          }}
-        />
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <Typography
-            variant={isMobile ? "h3" : "h2"}
-            className="font-bold text-center mb-4"
-            sx={{
-              textShadow: "0 2px 4px rgba(0,0,0,0.2)",
-              fontWeight: 800,
-            }}
-          >
-            Our Services
-          </Typography>
-          <Typography
-            variant={isMobile ? "body1" : "h6"}
-            className="text-center max-w-2xl mx-auto"
-            sx={{
-              opacity: 0.9,
-              fontWeight: 400,
-            }}
-          >
-            Comprehensive healthcare services tailored to meet your needs at
-            every stage of life
-          </Typography>
-        </Container>
-      </Box>
+      <CommonHeader
+        title="Our services"
+        subTitle=" Comprehensive healthcare services tailored to meet your needs at
+            every stage of life with 20 years of experience,"
+      />
 
       {/* Services Overview Section */}
       <Container
