@@ -39,12 +39,26 @@ const CommonHeader = ({ title, subTitle }: TProps) => {
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Typography
           variant="h1"
+          align="center"
           sx={{
-            fontSize: "32px",
-            textShadow: "0 2px 4px rgba(0,0,0,0.2)",
             fontWeight: 600,
-            pb: 2,
-            textAlign: "center",
+            fontSize: "40px",
+            mb: 3,
+            position: "relative",
+            display: "inline-block",
+            left: "50%",
+            transform: "translateX(-50%)",
+            "&:after": {
+              content: '""',
+              position: "absolute",
+              bottom: "-8px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "60px",
+              height: "4px",
+              backgroundColor: "white",
+              borderRadius: "2px",
+            },
           }}
         >
           {title}

@@ -15,8 +15,11 @@ import Link from "next/link";
 import { navbar_options } from "@/constant/navbar_options";
 import dynamic from "next/dynamic";
 import useUserInfo from "@/hooks/useUserInfo";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathName = usePathname();
+
   const userInfo = useUserInfo();
   const AuthButton = dynamic(() => import("@/app/login/AuthButton"), {
     ssr: false,
@@ -47,7 +50,7 @@ const Navbar = () => {
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
-              variant="h5"
+              variant="h4"
               noWrap
               component={Link}
               href="/"
@@ -57,7 +60,7 @@ const Navbar = () => {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "black",
+                color: "#202020",
                 textDecoration: "none",
               }}
             >
@@ -108,20 +111,20 @@ const Navbar = () => {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
-                {navbar_options.map((page, index) => {
-                  console.log({ page });
-                  return (
-                    <MenuItem key={index} onClick={handleCloseNavMenu}>
-                      <Typography
-                        component={Link}
-                        href={page?.path}
-                        sx={{ textAlign: "center" }}
-                      >
-                        {page?.path_name}
-                      </Typography>
-                    </MenuItem>
-                  );
-                })}
+                {navbar_options.map((page, index) => (
+                  <MenuItem key={index} onClick={handleCloseNavMenu}>
+                    <Typography
+                      color={pathName === page?.path ? "primary.main" : ""}
+                      component={Link}
+                      href={page?.path}
+                      sx={{
+                        textAlign: "center",
+                      }}
+                    >
+                      {page?.path_name}
+                    </Typography>
+                  </MenuItem>
+                ))}
                 {userInfo?.userId && (
                   <Typography
                     component={Link}
@@ -155,6 +158,7 @@ const Navbar = () => {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {navbar_options.map((page, index) => (
                 <Typography
+                  color={pathName === page?.path ? "primary.main" : ""}
                   component={Link}
                   href={page?.path}
                   key={index}
@@ -164,6 +168,7 @@ const Navbar = () => {
                     px: 2,
                     display: "block",
                     textTransform: "capitalize",
+                    fontSize: "18px",
                   }}
                 >
                   {page?.path_name}

@@ -40,7 +40,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
     doctor?.doctorSpecialties?.map(
       (specialty) => specialty?.specialties?.title
     ) || [];
-  console.log(doctor);
+  console.log({ doctor });
   return (
     <Card
       sx={{
