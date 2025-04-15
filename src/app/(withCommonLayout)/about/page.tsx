@@ -211,7 +211,6 @@ const AboutUsPage = () => {
   ];
   return (
     <Box className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
       <CommonHeader
         title="About our clinic"
         subTitle=" Providing exceptional healthcare with compassion and expertise for
@@ -292,7 +291,7 @@ const AboutUsPage = () => {
         </Grid>
       </Container>
 
-      {/* Mission and Values Section */}
+      {/* Mission and Values */}
       <Box
         sx={{
           backgroundColor: "rgba(239, 246, 255, 0.6)",
