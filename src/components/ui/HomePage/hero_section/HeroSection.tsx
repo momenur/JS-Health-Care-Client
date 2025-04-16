@@ -64,7 +64,9 @@ const HeroSection = () => {
           Perspiciatis
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button>Make Appointment</Button>
+          <Button component={Link} href="/doctors">
+            Make Appointment
+          </Button>
           <Button component={Link} href="/contact" variant="outlined">
             Contact Us
           </Button>

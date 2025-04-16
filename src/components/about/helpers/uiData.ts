@@ -82,7 +82,7 @@ export const testimonials: Testimonial[] = [
     id: 3,
     name: "Maria G.",
     image: "/placeholder.svg?height=100&width=100",
-    text: "I brought my daughter to see Dr. Rodriguez, and I couldn't be happier with the care she received. The clinic is child-friendly, and the staff made us feel comfortable from the moment we arrived.",
+    text: "I brought my daughter to see Dr. Rodriguez, and I couldn't be happier with the care she received. The clinic is child-friendly, and the staff made us feel comfortable.",
     rating: 5,
     date: "April 22, 2023",
   },
