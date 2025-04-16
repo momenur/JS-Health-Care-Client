@@ -653,7 +653,7 @@ const ContactPage = () => {
         sx={{ boxShadow: "inset 0 4px 20px rgba(0, 0, 0, 0.05)" }}
       >
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203584424!2d-118.39439492426837!3d34.0194536259278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b93cca9c7ab1%3A0x9b191d3aac3e37!2sCedars-Sinai%20Medical%20Center!5e0!3m2!1sen!2sus!4v1681489714387!5m2!1sen!2us"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.790905309413!2d90.36225137618048!3d23.826033285867016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c143b7c7cca5%3A0x6bf520429a98d902!2sPallabi%20Metro%20Station!5e0!3m2!1sen!2sbd!4v1744831626203!5m2!1sen!2sbd"
           width="100%"
           height="100%"
           style={{ border: 0 }}
