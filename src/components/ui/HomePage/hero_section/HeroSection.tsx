@@ -1,6 +1,7 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import assets from "@/assets";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -64,7 +65,9 @@ const HeroSection = () => {
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button>Make Appointment</Button>
-          <Button variant="outlined">Contact Us</Button>
+          <Button component={Link} href="/contact" variant="outlined">
+            Contact Us
+          </Button>
         </Box>
       </Box>
 
