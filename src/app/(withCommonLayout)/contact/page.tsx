@@ -661,7 +661,7 @@ const ContactPage = () => {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="Doctor's Office Location"
-        ></iframe>
+        />
       </Box>
 
       {/* Snackbar for form submission */}
