@@ -263,7 +263,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
 ];
 
-const MedicalService = ({ isMobile }: { isMobile: boolean }) => {
+const MedicalService = () => {
   return (
     <Box
       sx={{
@@ -273,7 +273,7 @@ const MedicalService = ({ isMobile }: { isMobile: boolean }) => {
     >
       <Container maxWidth="lg">
         <Typography
-          variant={isMobile ? "h4" : "h3"}
+          variant="h3"
           align="center"
           sx={{
             fontWeight: 700,
@@ -282,6 +282,11 @@ const MedicalService = ({ isMobile }: { isMobile: boolean }) => {
             display: "inline-block",
             left: "50%",
             transform: "translateX(-50%)",
+            fontSize: {
+              xs: "1.75rem", // similar to h4
+              sm: "2rem",
+              md: "2.5rem", // similar to h3
+            },
             "&:after": {
               content: '""',
               position: "absolute",
