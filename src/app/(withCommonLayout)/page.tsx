@@ -1,3 +1,4 @@
+import FaqSection from "@/components/service/FaqSection";
 import HeroSection from "@/components/ui/HomePage/hero_section/HeroSection";
 import HowItWorks from "@/components/ui/HomePage/how_it_work/HowItWork";
 import Specialist from "@/components/ui/HomePage/specialist/Specialist";
@@ -15,6 +16,7 @@ const HomePage = () => {
       <WhyUs />
       <HowItWorks />
       <Stats />
+      <FaqSection />
     </>
   );
 };
