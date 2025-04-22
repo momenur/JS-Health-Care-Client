@@ -263,148 +263,146 @@ export const serviceCategories: ServiceCategory[] = [
   },
 ];
 
-const MedicalService = () => {
-  return (
-    <Box
-      sx={{
-        backgroundColor: "rgba(239, 246, 255, 0.6)",
-        py: { xs: 8, md: 12 },
-      }}
-    >
-      <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            fontWeight: 700,
-            mb: 6,
-            position: "relative",
-            display: "inline-block",
+const MedicalService = () => (
+  <Box
+    sx={{
+      backgroundColor: "rgba(239, 246, 255, 0.6)",
+      py: { xs: 8, md: 12 },
+    }}
+  >
+    <Container maxWidth="lg">
+      <Typography
+        variant="h3"
+        align="center"
+        sx={{
+          fontWeight: 700,
+          mb: 6,
+          position: "relative",
+          display: "inline-block",
+          left: "50%",
+          transform: "translateX(-50%)",
+          fontSize: {
+            xs: "1.75rem", // similar to h4
+            sm: "2rem",
+            md: "2.5rem", // similar to h3
+          },
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            bottom: "-8px",
             left: "50%",
             transform: "translateX(-50%)",
-            fontSize: {
-              xs: "1.75rem", // similar to h4
-              sm: "2rem",
-              md: "2.5rem", // similar to h3
-            },
-            "&:after": {
-              content: '""',
-              position: "absolute",
-              bottom: "-8px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "60px",
-              height: "4px",
-              backgroundColor: "#3b82f6",
-              borderRadius: "2px",
-            },
-          }}
+            width: "60px",
+            height: "4px",
+            backgroundColor: "#3b82f6",
+            borderRadius: "2px",
+          },
+        }}
+      >
+        Our Medical Services
+      </Typography>
+
+      {serviceCategories.map((category) => (
+        <Box
+          key={category.id}
+          id={category.title.toLowerCase().replace(/\s+/g, "-")}
+          sx={{ mb: 8, scrollMarginTop: "100px" }}
         >
-          Our Medical Services
-        </Typography>
-
-        {serviceCategories.map((category) => (
-          <Box
-            key={category.id}
-            id={category.title.toLowerCase().replace(/\s+/g, "-")}
-            sx={{ mb: 8, scrollMarginTop: "100px" }}
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 5 },
+              borderRadius: "16px",
+              boxShadow: "0 10px 40px rgba(0, 0, 0, 0.05)",
+              border: "1px solid rgba(0,0,0,0.05)",
+              overflow: "hidden",
+            }}
           >
-            <Paper
-              elevation={0}
-              sx={{
-                p: { xs: 3, md: 5 },
-                borderRadius: "16px",
-                boxShadow: "0 10px 40px rgba(0, 0, 0, 0.05)",
-                border: "1px solid rgba(0,0,0,0.05)",
-                overflow: "hidden",
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
-                <Box
-                  sx={{
-                    backgroundColor: "rgba(59, 130, 246, 0.1)",
-                    borderRadius: "12px",
-                    p: 1.5,
-                    mr: 2,
-                  }}
-                >
-                  {category.icon}
-                </Box>
-                <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                  {category.title}
-                </Typography>
-              </Box>
-
-              <Typography
-                variant="body1"
-                sx={{ color: "#4b5563", mb: 4, lineHeight: 1.8 }}
+            <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
+              <Box
+                sx={{
+                  backgroundColor: "rgba(59, 130, 246, 0.1)",
+                  borderRadius: "12px",
+                  p: 1.5,
+                  mr: 2,
+                }}
               >
-                {category.description}
+                {category.icon}
+              </Box>
+              <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                {category.title}
               </Typography>
+            </Box>
 
-              <Grid container spacing={4}>
-                {category.services.map((service) => (
-                  <Grid item xs={12} md={4} key={service.id}>
-                    <Box
-                      sx={{
-                        height: "100%",
-                        p: 3,
-                        borderRadius: "12px",
-                        border: "1px solid rgba(59, 130, 246, 0.2)",
-                        backgroundColor: "rgba(239, 246, 255, 0.5)",
-                        transition: "all 0.3s ease",
-                        "&:hover": {
-                          boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
-                          backgroundColor: "rgba(239, 246, 255, 0.8)",
-                        },
-                      }}
+            <Typography
+              variant="body1"
+              sx={{ color: "#4b5563", mb: 4, lineHeight: 1.8 }}
+            >
+              {category.description}
+            </Typography>
+
+            <Grid container spacing={4}>
+              {category.services.map((service) => (
+                <Grid item xs={12} md={4} key={service.id}>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      p: 3,
+                      borderRadius: "12px",
+                      border: "1px solid rgba(59, 130, 246, 0.2)",
+                      backgroundColor: "rgba(239, 246, 255, 0.5)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
+                        backgroundColor: "rgba(239, 246, 255, 0.8)",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{ fontWeight: 700, mb: 2, color: "#1e40af" }}
                     >
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 700, mb: 2, color: "#1e40af" }}
-                      >
-                        {service.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "#4b5563", mb: 3 }}
-                      >
-                        {service.description}
-                      </Typography>
-                      <Typography
-                        variant="subtitle2"
-                        sx={{ fontWeight: 600, mb: 1, color: "#2563eb" }}
-                      >
-                        Benefits:
-                      </Typography>
-                      <List dense disablePadding>
-                        {service.benefits.map((benefit, index) => (
-                          <ListItem key={index} disablePadding sx={{ mb: 0.5 }}>
-                            <ListItemIcon sx={{ minWidth: 28 }}>
-                              <CheckIcon
-                                sx={{ color: "#2563eb", fontSize: 18 }}
-                              />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary={benefit}
-                              primaryTypographyProps={{
-                                variant: "body2",
-                                color: "#4b5563",
-                              }}
+                      {service.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "#4b5563", mb: 3 }}
+                    >
+                      {service.description}
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ fontWeight: 600, mb: 1, color: "#2563eb" }}
+                    >
+                      Benefits:
+                    </Typography>
+                    <List dense disablePadding>
+                      {service.benefits.map((benefit, index) => (
+                        <ListItem key={index} disablePadding sx={{ mb: 0.5 }}>
+                          <ListItemIcon sx={{ minWidth: 28 }}>
+                            <CheckIcon
+                              sx={{ color: "#2563eb", fontSize: 18 }}
                             />
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </Paper>
-          </Box>
-        ))}
-      </Container>
-    </Box>
-  );
-};
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={benefit}
+                            primaryTypographyProps={{
+                              variant: "body2",
+                              color: "#4b5563",
+                            }}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Paper>
+        </Box>
+      ))}
+    </Container>
+  </Box>
+);
 
 export default MedicalService;

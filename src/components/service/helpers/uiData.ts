@@ -1,3 +1,5 @@
+// Type declaration
+
 interface FAQ {
   id: number;
   question: string;
@@ -10,6 +12,7 @@ interface InsuranceProvider {
   logo: string;
 }
 
+// Fake data Declaration
 export const faqs: FAQ[] = [
   {
     id: 1,

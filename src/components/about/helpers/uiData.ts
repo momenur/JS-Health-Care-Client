@@ -1,3 +1,5 @@
+// Type declaration
+
 interface Award {
   id: number;
   title: string;
@@ -26,6 +28,7 @@ interface Doctor {
   bio: string;
 }
 
+// Fake data declaration
 export const awards: Award[] = [
   {
     id: 1,
