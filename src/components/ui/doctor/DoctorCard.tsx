@@ -57,7 +57,6 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
         },
       }}
     >
-      {/* Status Badge */}
       <Box
         sx={{
           position: "absolute",
