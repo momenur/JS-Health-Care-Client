@@ -35,12 +35,13 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
   const placeholder =
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
-  // Extract specialties as an array of strings
+
   const specialties =
     doctor?.doctorSpecialties?.map(
       (specialty) => specialty?.specialties?.title
     ) || [];
-  console.log({ doctor });
+
+
   return (
     <Card
       sx={{
