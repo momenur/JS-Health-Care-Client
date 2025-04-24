@@ -17,7 +17,6 @@ import {
   AttachMoney,
   ArrowForward,
 } from "@mui/icons-material";
-import Image from "next/image";
 import Link from "next/link";
 
 export type Doctor = {
@@ -35,12 +34,10 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
   const placeholder =
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
-
   const specialties =
     doctor?.doctorSpecialties?.map(
       (specialty) => specialty?.specialties?.title
     ) || [];
-
 
   return (
     <Card
@@ -83,7 +80,6 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
 
       {/* Card Content */}
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
-        {/* Left Section - Image */}
         <Box
           sx={{
             position: "relative",
@@ -162,7 +158,6 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
             justifyContent: "space-between",
           }}
         >
-          {/* Doctor Info */}
           <Box>
             <Typography
               variant="h5"
