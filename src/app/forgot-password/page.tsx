@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useForgotPasswordMutation } from "@/redux/api/authApi";
 
-export const validationSchema = z.object({
+const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
 });
 
