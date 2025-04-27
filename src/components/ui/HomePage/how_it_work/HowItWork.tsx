@@ -6,7 +6,7 @@ import searchIcon from "@/assets/icons/search-icon.png";
 import doctorIcon from "@/assets/icons/doctor-icon.png";
 import appointmentIcon from "@/assets/icons/appointment-icon.png";
 import charityIcon from "@/assets/icons/charity-icon.png";
-import Title from "../../common/Title";
+import Title from "@/components/ui/common/Title";
 
 const HowItWorks = () => {
   return (
