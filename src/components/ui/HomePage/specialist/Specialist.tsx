@@ -3,11 +3,14 @@ import Image from "next/image";
 import Title from "../../common/Title";
 
 const Specialist = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/specialties", {
-    next: {
-      revalidate: 30,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/specialties`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
+  );
   const { data: specialties } = await res.json();
 
   return (
