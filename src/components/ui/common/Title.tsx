@@ -1,3 +1,5 @@
+// title component
+
 import { Box, Typography } from "@mui/material";
 
 type TTitleProps = {
