@@ -4,7 +4,7 @@ import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
 } from "@/redux/api/myProfile";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 import React, { useState } from "react";
 import DoctorInformation from "./components/DoctorInformation";
