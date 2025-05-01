@@ -1,4 +1,3 @@
-import CommonHeader from "@/components/ui/common/CommonHeader";
 import DoctorCard from "@/components/ui/doctor/DoctorCard";
 import { Doctor } from "@/types/doctor";
 import DashedLine from "@/ui/doctor/DashedLine";
@@ -7,6 +6,10 @@ import React from "react";
 
 const Doctors = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`);
+
+  if (!res?.ok) {
+    throw new Error(`API error: ${res.status}`);
+  }
 
   const { data } = await res.json();
 
