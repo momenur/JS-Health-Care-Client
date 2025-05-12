@@ -6,12 +6,8 @@ import React from "react";
 
 const Doctors = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`);
-
-  // if (!res?.ok) {
-  //   throw new Error(`API error: ${res.status}`);
-  // }
-
-  const { data } = await res.json();
+  if (!res) throw new Error("Fetch failed");
+  const data = await res.json();
 
   return (
     <Container
