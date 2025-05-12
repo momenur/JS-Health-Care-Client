@@ -6,9 +6,12 @@ import React from "react";
 
 async function fetchDoctors() {
   try {
-    const res = await fetch(`${process.env.API_URL}/doctors`, {
-      cache: "no-store", // prevent caching during SSR
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctors`,
+      {
+        cache: "no-store", // prevent caching during SSR
+      }
+    );
 
     if (!res.ok) {
       throw new Error(`Failed to fetch doctors. Status: ${res.status}`);
