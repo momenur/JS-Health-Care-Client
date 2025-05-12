@@ -4,10 +4,32 @@ import DashedLine from "@/ui/doctor/DashedLine";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 
+async function fetchDoctors() {
+  try {
+    const res = await fetch(`${process.env.API_URL}/doctors`, {
+      cache: "no-store", // prevent caching during SSR
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch doctors. Status: ${res.status}`);
+    }
+
+    const contentType = res.headers.get("content-type");
+    if (!contentType?.includes("application/json")) {
+      const text = await res.text();
+      throw new Error(`Expected JSON, got: ${text.substring(0, 100)}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err: any) {
+    console.error("Fetch error:", err.message);
+    return [];
+  }
+}
+
 const Doctors = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`);
-  if (!res) throw new Error("Fetch failed");
-  const data = await res.json();
+  const doctors = await fetchDoctors();
 
   return (
     <Container
@@ -41,10 +63,10 @@ const Doctors = async () => {
       >
         All doctors of our clinic
       </Typography>
-      {data?.map((doctor: Doctor, index: number) => (
+      {doctors?.map((doctor: Doctor, index: number) => (
         <Box key={doctor?.id} sx={{ padding: 3, borderRadius: 2 }}>
           <DoctorCard doctor={doctor} />
-          {index + 1 < data?.length && <DashedLine />}
+          {index + 1 < doctors?.length && <DashedLine />}
         </Box>
       ))}
     </Container>
