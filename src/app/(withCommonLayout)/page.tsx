@@ -6,18 +6,15 @@ import Stats from "@/components/ui/HomePage/stats/Stats";
 import TopRatedDoctors from "@/components/ui/HomePage/top_rated_doctors/TopRatedDoctors";
 import WhyUs from "@/components/ui/HomePage/why_us/WhyUs";
 
-const HomePage = () => {
-  return (
-    <>
-      <HeroSection />
-      <Specialist />
-      <TopRatedDoctors />
-      <WhyUs />
-      <HowItWorks />
-      <Stats />
-      <FaqSection />
-    </>
-  );
-};
-
+const HomePage = () => (
+  <>
+    <HeroSection />
+    <Specialist />
+    <TopRatedDoctors />
+    <WhyUs />
+    <HowItWorks />
+    <Stats />
+    <FaqSection />
+  </>
+);
 export default HomePage;

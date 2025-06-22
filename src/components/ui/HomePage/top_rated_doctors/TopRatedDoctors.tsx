@@ -40,7 +40,7 @@ const TopRatedDoctors = async () => (
 
     <Container sx={{ mt: { xs: 5, md: 8, lg: 10 } }}>
       <Grid container spacing={{ xs: 2, md: 3, lg: 4 }}>
-        {doctors?.slice(0, 3).map((doctor: any) => (
+        {doctors?.map((doctor: any) => (
           <Grid item xs={12} sm={6} lg={4} key={doctor?.id}>
             <Card
               sx={{
